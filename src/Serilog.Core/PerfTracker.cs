@@ -57,7 +57,7 @@ namespace Serilog.Core
         {
             sw.Stop();
             infoLog.ElapsedMilliseconds = sw.ElapsedMilliseconds;
-            Logger.WritePerf(infoLog);
+            CLogger.WritePerf(infoLog);
         }
     }
 }

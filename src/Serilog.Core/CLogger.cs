@@ -4,14 +4,14 @@ using Serilog.Events;
 
 namespace Serilog.Core
 {
-    public static class Logger
+    public static class CLogger
     {
         private static readonly ILogger perfLogger;
         private static readonly ILogger usageLogger;
         private static readonly ILogger errorLogger;
         private static readonly ILogger diagnosticLogger;
 
-        static Logger()
+        static CLogger()
         {
             perfLogger = new LoggerConfiguration()
                 .WriteTo.File(path: "perf.txt")
