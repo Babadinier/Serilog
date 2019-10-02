@@ -40,8 +40,23 @@ namespace Serilog.Core
         }
         public static void WriteError(LogDetail infoLog)
         {
+            if (infoLog.Exception != null)
+            {
+                infoLog.Message = GetMessageFromException(infoLog.Exception);
+            }
             errorLogger.Write(LogEventLevel.Information, "{@LogDetail}", infoLog);
         }
+
+        private static string GetMessageFromException(Exception ex)
+        {
+            if (ex.InnerException != null)
+            {
+                return GetMessageFromException(ex.InnerException);
+            }
+
+            return ex.Message;
+        }
+
         public static void WriteDiagnostic(LogDetail infoLog)
         {
             var writeDiagnostics = Convert.ToBoolean(ConfigurationManager.AppSettings["EnableDiagnostics"]);
